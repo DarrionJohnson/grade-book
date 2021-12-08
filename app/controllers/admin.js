@@ -1,6 +1,6 @@
+import bcrypt from "bcrypt";
 import client from "../client.js";
 import config from "../config.js";
-import bcrypt from "bcrypt";
 
 const admin = client.db(config.db.name).collection("admin");
 
@@ -25,7 +25,7 @@ export default {
 
     const encrypt = bcrypt.hash(password, 10);
 
-    // TODO: Use insertOne to insert an admin into database
+    return admin.insertOne({ userName, password: encrypt });
   },
   async SharedWorker(userName, password) {},
 };
