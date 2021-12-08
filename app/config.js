@@ -9,6 +9,7 @@ export default {
     uri: process.env.MONGODB_URI,
   },
   encryption: {
+    expiresIn: process.env.EXPIRES_IN || "7d",
     saltRounds: process.env.SALT_ROUNDS || 10,
     secret: process.env.ENCRYPTION_SECRET || "secret",
   },

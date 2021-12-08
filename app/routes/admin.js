@@ -13,7 +13,10 @@ router.post("/register", async (req, res) => {
     const newUser = await adminController.create(userName, password);
     console.log("Post Requested" + newUser);
 
-    res.json("JWT");
+    // log user in and await jwt
+    const token = await adminController.show(userName, password);
+
+    res.send(token);
   } catch ({ message }) {
     res.status(400).json({ message });
   }

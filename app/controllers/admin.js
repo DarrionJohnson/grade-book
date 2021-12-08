@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import client from "../client.js";
 import config from "../config.js";
 
@@ -41,6 +42,8 @@ export default {
       throw Error("Passwords does not match");
     }
 
-    return user;
+    return jwt.sign({ userName }, config.encryption.secret, {
+      expiresIn: config.encryption.expiresIn,
+    });
   },
 };
