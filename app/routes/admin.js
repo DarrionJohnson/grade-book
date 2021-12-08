@@ -12,9 +12,13 @@ router.post("/register", (req, res) => {
     const { userName, password } = req.body;
     adminController.create(userName, password);
     res.send("Post Request");
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  } catch ({ message }) {
+    res.status(400).json({ message });
   }
+  // Same as above
+  // catch (error) {
+  //   res.status(400).json({ message: error.message });
+  // }
 });
 
 export default router;

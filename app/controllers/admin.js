@@ -21,7 +21,6 @@ export default {
     if (existingUser) {
       throw new Error("User already exists");
     }
-    const existingUser = admin.findOne({ userName });
 
     // TODO: Encrypt the Password
 
