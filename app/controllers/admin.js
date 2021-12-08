@@ -1,5 +1,6 @@
 import client from "../client.js";
 import config from "../config.js";
+import bcrypt from "bcrypt";
 
 const admin = client.db(config.db.name).collection("admin");
 
@@ -22,7 +23,7 @@ export default {
       throw new Error("User already exists");
     }
 
-    // TODO: Encrypt the Password
+    const encrypt = bcrypt.hash(password, 10);
 
     // TODO: Use insertOne to insert an admin into database
   },
