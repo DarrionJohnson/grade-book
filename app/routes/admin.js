@@ -11,7 +11,9 @@ router.post("/register", async (req, res) => {
   try {
     const { userName, password } = req.body;
     const newUser = await adminController.create(userName, password);
-    res.json("Post Requested" + newUser);
+    console.log("Post Requested" + newUser);
+
+    res.json("JWT");
   } catch ({ message }) {
     res.status(400).json({ message });
   }
