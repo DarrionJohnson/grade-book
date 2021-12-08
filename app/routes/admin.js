@@ -7,11 +7,11 @@ router.get("/", (_, res) => {
   res.send("Hello World from Grade Book Admin");
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const { userName, password } = req.body;
-    adminController.create(userName, password);
-    res.send("Post Request");
+    const newUser = await adminController.create(userName, password);
+    res.json("Post Requested", newUser);
   } catch ({ message }) {
     res.status(400).json({ message });
   }
