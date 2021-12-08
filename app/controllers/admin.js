@@ -21,12 +21,11 @@ export default {
     if (existingUser) {
       throw new Error("User already exists");
     }
+    const existingUser = admin.findOne({ userName });
 
     // TODO: Encrypt the Password
 
     // TODO: Use insertOne to insert an admin into database
-
-    // TODO: Chek for an existing user in the DB
   },
   async SharedWorker(userName, password) {},
 };
