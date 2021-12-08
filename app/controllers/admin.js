@@ -23,7 +23,7 @@ export default {
       throw new Error("User already exists");
     }
 
-    const encrypt = bcrypt.hash(password, 10);
+    const encrypt = await bcrypt.hash(password, 10);
 
     return admin.insertOne({ userName, password: encrypt });
   },
