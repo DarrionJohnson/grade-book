@@ -26,7 +26,7 @@ export default {
 
     // TODO: Use insertOne to insert an admin into database
 
-    // TODO:
+    // TODO: Chek for an existing user in the DB
   },
   async SharedWorker(userName, password) {},
 };
