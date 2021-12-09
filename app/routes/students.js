@@ -12,8 +12,8 @@ router.post("/", async (req, res) => {
     try {
       const students = await studentsController.index();
       res.json(students);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+    } catch ({ message }) {
+      res.status(500).json({ message });
     }
   } else {
     res.status(401).json({ message: "Access Denied" });
