@@ -1,12 +1,15 @@
-import client from "../client.js";
-import config from "../config.js";
+import { Router } from "express";
+import studentsController from "../controllers/students.js";
 
-const StudentClient = client
-  .db(config.db.name)
-  .collection(config.db.collection);
+const router = new Router();
 
-export default {
-  index() {
-    return StudentClient.find().toArray();
-  },
-};
+router.get("/", (_, res) => {
+  res.send("Hello World!");
+});
+
+router.post("/", async (_, res) => {
+  const students = await studentsController.index();
+  res.json(students);
+});
+
+export default router;
