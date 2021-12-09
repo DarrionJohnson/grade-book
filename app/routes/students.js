@@ -1,9 +1,12 @@
-import { Router } from "express";
+import client from "../client.js";
+import config from "../config.js";
 
-const router = new Router();
+const StudentClient = client
+  .db(config.db.name)
+  .collection(config.db.collection);
 
-router.get("/", (_, res) => {
-  res.send("Hello World from Grade Book Students");
-});
-
-export default router;
+export default {
+  index() {
+    return StudentClient.find().toArray();
+  },
+};
