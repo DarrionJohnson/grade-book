@@ -7,10 +7,16 @@ router.get("/", (_, res) => {
   res.send("Hello World!");
 });
 
-router.post("/register", (req, res) => {
-  const { username, password } = req.body;
-  adminController.create(username, password);
-  res.send("Post request");
+router.post("/register", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    await adminController.create(username, password);
+    const jwt = await adminController.show(username, password);
+
+    res.status(201).send(jwt);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 export default router;
