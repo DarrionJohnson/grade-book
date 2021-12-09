@@ -17,7 +17,7 @@ export default {
       password,
       "from Admin Controller."
     );
-
+    // Check for existing user(s)
     const existingUser = await admin.findOne({ userName });
 
     if (existingUser) {
