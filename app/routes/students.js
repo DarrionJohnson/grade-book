@@ -8,11 +8,13 @@ router.get("/", (_, res) => {
 });
 
 router.post("/", async (req, res) => {
-  // If the req is properly authorized...
-
   if (req.isAuth) {
-    const students = await studentsController.index();
-    res.json(students);
+    try {
+      const students = await studentsController.index();
+      res.json(students);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   } else {
     res.status(401).json({ message: "Access Denied" });
   }
