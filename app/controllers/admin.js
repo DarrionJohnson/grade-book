@@ -24,23 +24,31 @@ export default {
       throw new Error("User already exists");
     }
 
-    const encrypt = await bcrypt.hash(password, 10);
+    const encrypt = await bcrypt.hash(password, config.encryption.saltRounds);
 
     return admin.insertOne({ userName, password: encrypt });
   },
 
   async show(userName, password) {
-    const user = await admin.findOne({ userName });
+    const existingUser = await admin.findOne({ userName });
 
-    if (!user) {
-      throw Error("User not found");
+    const compare = await bcrypt.compare(password, existingUser.password);
+
+    if (!compare) {
+      throw Error("Access Denied");
     }
 
-    const match = await bcrypt.compare(password, user.password);
+    // const user = await admin.findOne({ userName });
 
-    if (!match) {
-      throw Error("Passwords does not match");
-    }
+    // if (!user) {
+    //   throw Error("User not found");
+    // }
+
+    // const match = await bcrypt.compare(password, user.password);
+
+    // if (!match) {
+    //   throw Error("Passwords does not match");
+    // }
 
     return jwt.sign({ userName }, config.encryption.secret, {
       expiresIn: config.encryption.expiresIn,
