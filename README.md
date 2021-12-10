@@ -6,14 +6,13 @@ Some 🏫s provide utter 💩 tools for instructors to keep track of their stude
 
 ## Primary Objectives
 
-- Add students.
 - Add assignments. Said assignments will have a title and total points possible. Said assignments will get automatically added for each student with a `null` for the initial points earned.
 - Add grades for an assignment by assigning points earned for each student.
 - Access a student and see all of their grades (points earned) per assignment.
-- Update admin password.
 
 ## Secondary Objectives
 
+- Add students.
 - Add additional admins, such as TAs that can manage grading.
 - ✉️ or text a student.
 - Allow admins to manage multiple classes.
@@ -30,6 +29,7 @@ Some 🏫s provide utter 💩 tools for instructors to keep track of their stude
 - In-app messaging.
 - Deploy mobile versions.
 - Import existing data from spreadsheets and/or 💩 apps.
+- Update admin password via ✉️ or text 💬.
 
 ## Sample Data
 
