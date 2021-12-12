@@ -6,6 +6,7 @@ import config from "../config.js";
 const admin = client.db(config.db.name).collection("admin");
 
 export default {
+<<<<<<< HEAD
   async create(userName, password) {
     // check for an existing user in the DB
 
@@ -52,6 +53,34 @@ export default {
 
     return jwt.sign({ userName }, config.encryption.secret, {
       expiresIn: config.encryption.expiresIn,
+=======
+  async create(username, password) {
+    const existingUser = await admin.findOne({ username });
+
+    if (existingUser) {
+      throw new Error("Username already exists!");
+    }
+
+    const hashedPass = await bcrypt.hash(
+      password,
+      config.encryption.saltRounds
+    );
+
+    return admin.insertOne({ username, password: hashedPass });
+  },
+
+  async show(username, password) {
+    const existingUser = await admin.findOne({ username });
+
+    const comparison = await bcrypt.compare(password, existingUser.password);
+
+    if (!comparison) {
+      throw new Error("Access denied");
+    }
+
+    return jwt.sign({ username }, config.encryption.secret, {
+      expiresIn: config.encryption.expiration,
+>>>>>>> ac762aa4621e34b193cdd1298082ac167b3246df
     });
   },
 };
