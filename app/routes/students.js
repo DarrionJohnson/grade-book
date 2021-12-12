@@ -8,8 +8,6 @@ router.get("/", (_, res) => {
 });
 
 router.post("/", async (req, res) => {
-  // If the req is properly authorized...
-
   if (req.isAuth) {
     const students = await studentsController.index();
     res.json(students);
