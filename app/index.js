@@ -1,6 +1,6 @@
 import express from "express";
 import config from "./config.js";
-import isAuth from "./Middelware/isAuth.js";
+import isAuth from "./Middleware/isAuth.js";
 import router from "./routes/index.js";
 
 const app = express();
