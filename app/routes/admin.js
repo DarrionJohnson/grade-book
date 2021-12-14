@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
     const jwt = await adminController.show(req.body);
 
     res.status(200).send(jwt);
-  } catch (message) {
+  } catch ({ message }) {
     res.status(400).json({ message });
   }
 });
