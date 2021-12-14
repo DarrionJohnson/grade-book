@@ -32,14 +32,14 @@ export default {
   async show({ userName, password }) {
     const existingUser = await admin.findOne({ userName });
 
-    // if (!existingUser) {
-    //   throw Error("Access Denied");
-    // }
+    if (!existingUser) {
+      throw new Error("Access Denied");
+    }
 
     const compare = await bcrypt.compare(password, existingUser.password);
 
-    if (!compare || !existingUser) {
-      throw Error("Access Denied");
+    if (!compare) {
+      throw new Error("Access Denied");
     }
 
     // const user = await admin.findOne({ userName });
