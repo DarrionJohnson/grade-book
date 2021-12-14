@@ -29,7 +29,7 @@ export default {
     return admin.insertOne({ userName, password: encrypt, role });
   },
 
-  async show(userName, password) {
+  async show({ userName, password }) {
     const existingUser = await admin.findOne({ userName });
 
     const compare = await bcrypt.compare(password, existingUser.password);
@@ -50,8 +50,12 @@ export default {
     //   throw Error("Passwords does not match");
     // }
 
-    return jwt.sign({ userName }, config.encryption.secret, {
-      expiresIn: config.encryption.expiresIn,
-    });
+    return jwt.sign(
+      { userName, role: existingUser.role },
+      config.encryption.secret,
+      {
+        expiresIn: config.encryption.expiresIn,
+      }
+    );
   },
 };
