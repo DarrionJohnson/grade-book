@@ -10,11 +10,13 @@ export default class Admin extends User {
     const error = [];
 
     if (!this.userName) {
-      console.error(.push("A Username is Required"));
-    } if (!this.password) {
-      console.error(.push("A Password is Required"));
+      error.push("A Username is Required");
     }
 
-    return errors;
+    if (!this.password) {
+      error.push("A Password is Required");
+    }
+
+    return error;
   }
 }
