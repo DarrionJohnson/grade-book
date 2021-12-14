@@ -26,7 +26,7 @@ export default {
 
     const encrypt = await bcrypt.hash(password, config.encryption.saltRounds);
 
-    return admin.insertOne({ userName, password: encrypt });
+    return admin.insertOne({ userName, password: encrypt, role });
   },
 
   async show(userName, password) {
