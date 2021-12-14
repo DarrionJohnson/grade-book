@@ -6,7 +6,7 @@ import config from "../config.js";
 const admin = client.db(config.db.name).collection("admin");
 
 export default {
-  async create(userName, password) {
+  async create({ userName, password, role }) {
     // check for an existing user in the DB
 
     console.log(
