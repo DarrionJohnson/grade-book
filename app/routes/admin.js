@@ -1,5 +1,6 @@
 import { Router } from "express";
 import adminController from "../controllers/admin.js";
+import Admin from "../Models/Users/Admin.js";
 
 const router = new Router();
 
@@ -9,12 +10,19 @@ router.get("/", (_, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    const { userName, password } = req.body;
-    const newUser = await adminController.create(userName, password);
+    const admin = new Admin(req.body);
+    console.log(admin);
+    const error = admin.validate();
+
+    if (error.length) {
+      throw new Error(error.join("\n"));
+    }
+
+    const newUser = await adminController.create(admin);
     console.log("Post Requested" + newUser);
 
     // log user in and await jwt
-    const token = await adminController.show(userName, password);
+    const token = await adminController.show(admin);
 
     res.status(201).send(token);
   } catch ({ message }) {
