@@ -8,7 +8,7 @@ router.get("/", (_, res) => {
 });
 
 router.post("/", async ({ isAuth }, res) => {
-  if (isAuth.role === "ADMIN") {
+  if (isAuth?.role === "ADMIN") {
     const students = await studentsController.index();
     res.json(students);
   } else {
