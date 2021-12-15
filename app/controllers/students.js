@@ -10,7 +10,7 @@ export default {
   },
 
   show(id) {
-    return studentsClient.find({ _id: objectId(id) });
+    return studentsClient.findOne({ _id: objectId(id) });
   },
 
   async update(id, grade) {
