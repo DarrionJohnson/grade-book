@@ -9,6 +9,10 @@ export default {
     return studentsClient.find().toArray();
   },
 
+  show(id) {
+    return studentsClient.find({ _id: objectId(id) });
+  },
+
   async update(id, grade) {
     const studentQuery = {
       _id: objectId(id),
