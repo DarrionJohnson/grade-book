@@ -20,7 +20,7 @@ router.post("/", async ({ isAuth }, res) => {
   }
 });
 
-router.post("/graded/:studentId", async ({ isAuth, body, params }, res) => {
+router.put("/graded/:studentId", async ({ isAuth, body, params }, res) => {
   if (isAuth?.role === "ADMIN") {
     try {
       const grade = await studentsController.update(params.studentId, body);
