@@ -7,17 +7,6 @@ const admin = client.db(config.db.name).collection("admin");
 
 export default {
   async create({ userName, password, role }) {
-    // check for an existing user in the DB
-
-    console.log(
-      "User Name:",
-      userName,
-      " || ",
-      "Password:",
-      password,
-      "from Admin Controller."
-    );
-    // Check for existing user(s)
     const existingUser = await admin.findOne({ userName });
 
     if (existingUser) {
@@ -41,18 +30,6 @@ export default {
     if (!compare) {
       throw new Error("Access Denied");
     }
-
-    // const user = await admin.findOne({ userName });
-
-    // if (!user) {
-    //   throw Error("User not found");
-    // }
-
-    // const match = await bcrypt.compare(password, user.password);
-
-    // if (!match) {
-    //   throw Error("Passwords does not match");
-    // }
 
     return jwt.sign(
       { userName, role: existingUser.role },

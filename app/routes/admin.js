@@ -11,7 +11,6 @@ router.get("/", (_, res) => {
 router.post("/register", async (req, res) => {
   try {
     const admin = new Admin(req.body);
-    console.log(admin);
     const error = admin.validate();
 
     if (error.length) {
@@ -21,17 +20,12 @@ router.post("/register", async (req, res) => {
     const newUser = await adminController.create(admin);
     console.log("Post Requested" + newUser);
 
-    // log user in and await jwt
     const token = await adminController.show(admin);
 
     res.status(201).send(token);
   } catch ({ message }) {
     res.status(400).json({ message });
   }
-  // Same as above
-  // catch (error) {
-  //   res.status(400).json({ message: error.message });
-  // }
 });
 
 router.post("/login", async (req, res) => {
