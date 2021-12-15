@@ -11,13 +11,23 @@ router.post("/", async ({ isAuth }, res) => {
   if (isAuth?.role === "ADMIN") {
     try {
       const students = await studentsController.index();
-    res.json(students);
-
-    } catch ({message}) {
+      res.json(students);
+    } catch ({ message }) {
+      res.status(500).json({ message });
+    }
   } else {
-    res.status(500).json({ message });
-  }
     res.status(401).json({ message: "Access Denied" });
+  }
+});
+
+router.post("/graded/:studentId", async ({ isAuth, body, params }, res) => {
+  if (isAuth?.role === "ADMIN") {
+    try {
+      const grade = await studentsController.update(params.id, body);
+      res.json(grade);
+    } catch (message) {
+      res.status(500).json({ message });
+    }
   }
 });
 
