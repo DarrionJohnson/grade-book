@@ -1,15 +1,28 @@
 import { Router } from "express";
 import assignmentsController from "../controllers/assignments.js";
+import Assignment from "../models/Assignment.js";
 
 const router = new Router();
 
-router.post("/", async (req, res) => {
-  if (req.isAuth) {
-    const spit = await assignmentsController.create(req.body);
+router.post("/", async ({ isAuth, body }, res) => {
+  try {
+    if (isAuth?.role === "ADMIN") {
+      const assign = new Assignment(body);
 
-    res.status(201).json({ spit });
-  } else {
-    res.status(401).json({ message: "Unauthorized" });
+      const errors = assign.validate();
+
+      if (errors.length) {
+        throw new Error(errors.join("\n"));
+      }
+
+      const respond = await assignmentsController.create(body);
+
+      res.status(201).json(respond);
+    } else {
+      throw new Error("You are not Authorized to preform this action.");
+    }
+  } catch ({ Message }) {
+    res.status(400).json({ Message });
   }
 });
 
