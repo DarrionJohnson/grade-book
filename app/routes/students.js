@@ -20,6 +20,19 @@ router.post("/", async ({ isAuth }, res) => {
   }
 });
 
+router.post("/:id", async ({ isAuth, params }, res) => {
+  if (isAuth?.role === "ADMIN") {
+    try {
+      const findStudent = await studentsController.show(params.id);
+      res.json(findStudent);
+    } catch ({ message }) {
+      res.status(500).json({ message });
+    }
+  } else {
+    res.status(401).json({ message: "Access Denied" });
+  }
+});
+
 router.put("/graded/:studentId", async ({ isAuth, body, params }, res) => {
   if (isAuth?.role === "ADMIN") {
     try {
