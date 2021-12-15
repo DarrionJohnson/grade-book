@@ -21,8 +21,8 @@ router.post("/", async ({ isAuth, body }, res) => {
     } else {
       throw new Error("You are not Authorized to preform this action.");
     }
-  } catch ({ Message }) {
-    res.status(400).json({ Message });
+  } catch ({ message }) {
+    res.status(400).json({ message });
   }
 });
 
