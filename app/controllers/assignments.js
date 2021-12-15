@@ -1,8 +1,8 @@
 import client from "../client.js";
 import config from "../config.js";
-import students from "./students.js";
 
 const assignments = client.db(config.db.name).collection("assignments");
+const students = client.db(config.db.name).collection("students");
 
 export default {
   async create(newAssignment) {
