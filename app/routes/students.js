@@ -23,9 +23,9 @@ router.post("/", async ({ isAuth }, res) => {
 router.post("/graded/:studentId", async ({ isAuth, body, params }, res) => {
   if (isAuth?.role === "ADMIN") {
     try {
-      const grade = await studentsController.update(params.id, body);
+      const grade = await studentsController.update(params.studentId, body);
       res.json(grade);
-    } catch (message) {
+    } catch ({ message }) {
       res.status(500).json({ message });
     }
   }
